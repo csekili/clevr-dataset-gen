@@ -489,6 +489,7 @@ def check_visibility(blender_objects, min_pixels_per_object):
   p = list(img.pixels)
   color_count = Counter((p[i], p[i+1], p[i+2], p[i+3])
                         for i in range(0, len(p), 4))
+  os.close(f)
   os.remove(path)
   if len(color_count) != len(blender_objects) + 1:
     return False
