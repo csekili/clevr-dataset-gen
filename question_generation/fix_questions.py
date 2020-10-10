@@ -14,11 +14,21 @@ def main(args):
         info = question_data['info']
         questions = question_data['questions']
     print('Read %d questions from disk' % len(questions))
-    # Rename 'type' to 'program'
     for q in questions:
+        # Rename 'type' to 'function'
         programs = q['program']
         for p in programs:
             p['function'] = p.pop('type')
+        answer = q['answer']
+        # Stringyfy 'answer'
+        if answer is True:
+            answer = 'yes'
+        elif answer is False:
+            answer = 'no'
+        else:
+            answer = str(answer)
+        q['answer'] = answer
+
     # Dump new dict
     with open(args.output_questions_file, 'w') as f:
         print('Writing output to %s' % args.output_questions_file)
